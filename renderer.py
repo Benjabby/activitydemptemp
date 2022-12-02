@@ -192,6 +192,8 @@ class _ImageRenderer():
         xp = (packet.kps[:,0] * self.v_inner_shape[1]).astype(int)
         yp = (packet.kps[:,1] * self.v_inner_shape[0]).astype(int)
         viso = packet.vis & (xp>=0) & (yp>=0) & (yp<self.v_inner_shape[0]-1) & (xp<self.v_inner_shape[1]-1)
+        if not np.any(viso):
+            return
         vels = packet.vels[viso]
         xp = xp[viso]+GAUSS_RADIUS
         yp = yp[viso]+GAUSS_RADIUS
